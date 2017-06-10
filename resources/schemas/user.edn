@@ -1,0 +1,10 @@
+{:objects
+ {:User {:fields {:id {:type (non-null ID)}
+                  :name {:type (non-null String)}}}}
+
+ :queries
+ {:user {:type :User
+         :description "Retrieve a single user by ID"
+         :args {:id {:type (non-null ID)
+                     :description "UUID assigned to the user on sign-up"}}
+         :resolve :resolve-user}}}
