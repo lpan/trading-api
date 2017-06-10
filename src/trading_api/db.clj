@@ -1,5 +1,5 @@
 (ns trading-api.db)
 
-(defn resolve-user
+(defn get-user
   [ctx args value]
   {:name "lpan" :id "12345"})

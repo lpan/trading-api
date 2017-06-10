@@ -9,5 +9,5 @@
   (-> (io/resource "schemas/user.edn")
       slurp
       edn/read-string
-      (attach-resolvers {:resolve-user db/resolve-user})
+      (attach-resolvers {:get-user db/get-user})
       schema/compile))
