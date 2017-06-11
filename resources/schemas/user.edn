@@ -1,10 +1,55 @@
-{:objects
- {:User {:fields {:id {:type (non-null ID)}
-                  :name {:type (non-null String)}}}}
+{:enums
+ {:Status
+  {:values [:OPENED :CLOSED :CANCELED]
+   :description "Order status"}}
+
+ :interfaces
+ {:Asset
+  {:fields {:id {:type (non-null ID)}
+            :symbol {:type (non-null String)}
+            :amount {:type (non-null Int)}
+            :account {:type :Account}}}}
+
+ :objects
+ {:Cash
+  {:implements [:Asset]
+   :fields {:id {:type (non-null ID)}
+            :symbol {:type (non-null String)}
+            :amount {:type (non-null Int)}
+            :account {:type :Account}}}
+
+  :Stock
+  {:implements [:Asset]
+   :fields {:id {:type (non-null ID)}
+            :symbol {:type (non-null String)}
+            :amount {:type (non-null Int)}
+            :account {:type :Account}}}
+
+  :Order
+  {:fields {:id {:type (non-null ID)}
+            :source {:type (non-null :Asset)}
+            :target {:type (non-null :Asset)}
+            :status {:type (non-null :Status)}
+            :multiplier {:type (non-null Float)}}}
+
+  :Account
+  {:fields {:id {:type (non-null ID)}
+            :name {:type (non-null String)}
+            :default-currency {:type (non-null String)}
+            :assets {:type (non-null (list (non-null :Asset)))
+                     :resolve :get-assets}
+            :orders {:type (non-null (list (non-null :Order)))
+                     :resolve :get-orders}}}
+
+  :User
+  {:fields {:id {:type (non-null ID)}
+            :name {:type (non-null String)}
+            :accounts {:type (non-null (list :Account))
+                       :resolve :get-accounts}}}}
 
  :queries
- {:user {:type :User
-         :description "Retrieve a single user by ID"
-         :args {:id {:type (non-null ID)
-                     :description "UUID assigned to the user on sign-up"}}
-         :resolve :resolve-user}}}
+ {:user
+  {:type :User
+   :description "Retrieve a single user by ID"
+   :args {:id {:type (non-null ID)}}
+   :resolve :get-user}}}
