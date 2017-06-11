@@ -36,8 +36,10 @@
   {:fields {:id {:type (non-null ID)}
             :name {:type (non-null String)}
             :default-currency {:type (non-null String)}
-            :assets {:type (non-null (list String))}
-            :orders {:type (non-null (list String))}}}
+            :assets {:type (non-null (list (non-null :Asset)))
+                     :resolve :get-assets}
+            :orders {:type (non-null (list (non-null :Order)))
+                     :resolve :get-orders}}}
 
   :User
   {:fields {:id {:type (non-null ID)}

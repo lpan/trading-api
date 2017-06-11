@@ -27,3 +27,11 @@
 (defn get-accounts
   [ctx args value]
   (:accounts value))
+
+(defn get-assets
+  [ctx args value]
+  (:assets value))
+
+(defn get-orders
+  [ctx args value]
+  (:orders value))

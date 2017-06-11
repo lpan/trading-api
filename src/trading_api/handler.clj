@@ -24,4 +24,4 @@
   (-> app-routes
       wrap-json-response
       wrap-json-body
-      (wrap-defaults api-defaults))
+      (wrap-defaults api-defaults)))

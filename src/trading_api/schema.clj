@@ -10,5 +10,7 @@
       slurp
       edn/read-string
       (attach-resolvers {:get-user db/get-user
-                         :get-accounts db/get-accounts})
+                         :get-accounts db/get-accounts
+                         :get-assets db/get-assets
+                         :get-orders db/get-orders})
       schema/compile))
